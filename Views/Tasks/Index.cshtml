@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TaskManagement.Models.Task>
+@{
+    ViewBag.Title = "All Tasks";
+}
+
+<h2>All Tasks</h2>
+<p>@Html.ActionLink("Add New Task", "Create")</p>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var t in Model)
+    {
+        <tr>
+            <td>@t.Title</td>
+            <td>@(t.DueDate?.ToShortDateString() ?? "-")</td>
+            <td>
+                @if (t.IsCompleted)
+                {<span class="text-success">Complete</span> }
+                else
+                { <span class="text-warning">Pending</span>}
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = t.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = t.Id }) |
+                @using (Html.BeginForm("ToggleComplete", "Tasks", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("id", t.Id)
+                    <button type="submit" class="btn btn-link">
+                        @(t.IsCompleted ? "Mark Incomplete" : "Mark Complete")
+                    </button>
+                }
+            </td>
+        </tr>
+    }
+</table>
