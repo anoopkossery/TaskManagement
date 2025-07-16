@@ -16,7 +16,7 @@ setup project
 
 Technology used 
 ------------------
-Asp.net MVC version 5.2.9.0
-Entity Framework
-SQL Server Express LocalDB ((localdb)\MSSQLLocalDB)
+Asp.net MVC version 5.2.9.0, 
+Entity Framework, 
+SQL Server Express LocalDB ((localdb)\MSSQLLocalDB), 
 jQuery & Bootstrap
